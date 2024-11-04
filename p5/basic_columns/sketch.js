@@ -9,7 +9,7 @@ let img;
 const student_name = "Héctor Iván Patricio Moreno";
 const course = "Arquitectura de software";
 const minimum_color_value = 64;
-let top_and_right_same_color = true;
+let top_and_right_same_color = false;
 // Load the image.
 function preload() {
   img = loadImage('logo_cf.png');
@@ -32,6 +32,9 @@ function setup(){
 
 let top_start_color = pickRandomColor();
 let top_end_color = pickRandomColor();
+
+// ensure colors are not too dark
+
 
 let right_start_color = pickRandomColor();
 let right_end_color = pickRandomColor();
@@ -111,13 +114,20 @@ textSize(50);
 fill("#00ba9d");
 text(student_name, width/2, 250);
 
+fill(0);
+textSize(20);
+text("Por Participar y completar el Bootcamp:", width/2, 300);
+
+textSize(40);
+text(course, width/2, 350);
+
 }
 
 // Generate a random color hex
 function pickRandomColor(){
-  const r_pick = choice(0,1, 0.7);
-  const g_pick = choice(0,1, 0.5);
-  const b_pick = choice(0,1, 0.5);
+  const r_pick = choice(0,1, 0.3);
+  const g_pick = choice(0,1, 0.3);
+  const b_pick = choice(0,1, 0.3);
   let r = Math.floor(prng1.random(0.7, 1)*256*r_pick);
   let g = Math.floor(prng1.random(0.7, 1)*256*g_pick); 
   let b = Math.floor(prng1.random(0.7, 1)*256*b_pick);
@@ -131,7 +141,7 @@ function choice(a, b, p=0.5){
 }
 
 function generateGradient(x1, y1, x2, y2, start_color, end_color){
-  let gradient = drawingContext.createRadialGradient(x1, y1, tileSize, x2, y2, tileSize/4);
+  let gradient = drawingContext.createRadialGradient(x1, y1, 0, x2, y2, tileSize);
   // gradient.addColorStop(0, '#900');
   if (start_color == undefined) {
     start_color = pickRandomColor();
