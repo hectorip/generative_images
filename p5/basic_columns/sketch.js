@@ -1,4 +1,4 @@
-const tileSize = 15;
+const tileSize = 25;
 const sin30 = 1/2;
 const cos30 = Math.sqrt(3)/2;
 const halfTileLength = tileSize*cos30;
@@ -8,16 +8,17 @@ const tileBreadth = halfTileBreadth*2;
 let img;
 const student_name = "Héctor Iván Patricio Moreno";
 const course = "Arquitectura de software";
+const minimum_color_value = 64;
 let top_and_right_same_color = true;
 // Load the image.
 function preload() {
   img = loadImage('logo_cf.png');
 }
-let random_key = Math.random().toString(36).substring(2, 15); // 5eq7tb0ubum
-random_key = "5eq7tb0ubum";
+let random_key = "5eq7tb0ubum"; // secret key here
+// random_key = "5eq7tb0ubumu"; // secret key heredd
 
 let prng1 = isaacCSPRNG(student_name + " " + course + " " + random_key);
-const generalMargin = 10;
+const generalMargin = 10 * choice(0, 1);
 
 function setup(){
   createCanvas(1056, 816);
@@ -42,6 +43,7 @@ if (top_and_right_same_color) {
 let left_start_color = pickRandomColor();
 let left_end_color = pickRandomColor();
 
+console.log(top_start_color, top_end_color, right_start_color, right_end_color, left_start_color, left_end_color);
 // rightColor = 'LightSteelBlue';
 // leftColor = 'SlateGray';
 
@@ -82,7 +84,7 @@ textSize(100);
 	row++;
 	col = 0;
   }
-fill(255, 255, 255, 200);
+fill(255, 255, 255, 220);
 rect(30, 30, width-60, height-60);
 fill(255);
 // Top inner margin
