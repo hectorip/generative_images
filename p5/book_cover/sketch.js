@@ -1,53 +1,49 @@
-const tileSize = 25;
+const tileSize = 70;
 const sin30 = 1/2;
 const cos30 = Math.sqrt(3)/2;
 const halfTileLength = tileSize*cos30;
 const halfTileBreadth = tileSize*sin30;
 const tileLength = halfTileLength*2;
 const tileBreadth = halfTileBreadth*2;
-let img;
 const student_name = "Héctor Iván Patricio Moreno";
-const course = "Arquitectura de software";
-const minimum_color_value = 64;
+const course = "Data and Reality";
+const minimum_color_value = 0;
 let top_and_right_same_color = false;
 const urlParams = new URLSearchParams(window.location.search);
 const print_key = urlParams.get('print_key');
-// Load the image
-function preload() {
-  img = loadImage('logo_cf.png');
-}
 let random_key = "5eq7tb0ubum" + print_key; // secret key here
 // random_key = "5eq7tb0ubumu"; // secret key here
 
 let prng1 = isaacCSPRNG(student_name + " " + course + " " + random_key);
-const generalMargin = tileSize;
+const generalMargin = 0;
 
 function setup(){
-  createCanvas(1320, 1020);
+  createCanvas(1020, 1320);
   angleMode(DEGREES);
   noLoop();
   // Agregar botón de impresión
   let printButton = createButton('Imprimir');
-  printButton.position(20, 20);
+  // printButton.position(20, 20);
   printButton.class('no-print');
   printButton.mousePressed(() => print());
 }
 
-let top_start_color = pickRandomColor();
-let top_end_color = pickRandomColor();
+let top_start_color = "#004242";
+let top_end_color = "#2f4f4f";
 
 // ensure colors are not too dark
 
 
-let right_start_color = pickRandomColor();
-let right_end_color = pickRandomColor();
+let right_start_color = "white";
+let right_end_color = "#004242";
 if (top_and_right_same_color) {
   right_end_color = top_end_color;
   right_start_color = top_start_color;
 }
 
-let left_start_color = pickRandomColor();
-let left_end_color = pickRandomColor();
+let left_start_color = "white";
+let left_end_color = "white";
+
 
 console.log(top_start_color, top_end_color, right_start_color, right_end_color, left_start_color, left_end_color);
 // rightColor = 'LightSteelBlue';
@@ -69,13 +65,11 @@ textSize(100);
 	  x < width + halfTileLength;
 	  x += tileLength+margin){
       // Dedice if drawing the tile
-      let draw_tile = choice(true, false, 0.99);
-      if (!draw_tile) {
-        continue;
-      }
-	  let d = dist(x, y, mouseX, mouseY);
-	  let b = max(0, 100-d/2);
-    generateGradient(x, y, x, y-tileBreadth, top_start_color, top_end_color);
+      // let draw_tile = choice(true, false, 0.98);
+      // if (!draw_tile) {
+      //   continue;
+      // }
+    generateGradient(x, y, x+halfTileLength, y, top_start_color, top_end_color);
 	  quad(x, y, x-halfTileLength, y-halfTileBreadth,
 		   x, y-tileBreadth, x+halfTileLength, y-halfTileBreadth);
 	  // fill(b+map(mouseX-x, -width, width, 50, 250));
@@ -96,38 +90,28 @@ textSize(100);
 	col = 0;
   }
 fill(255, 255, 255, 220);
-rect(30, 30, width-60, height-60);
-fill(255);
-// Top inner margin
-rect(30, 30, width-60, 20);
-// Bottom inner margin
-rect(30, height-40, width-60, 20);
-// Left inner margin
-rect(30, 50, 20, height-70);
-// Right inner margin
-rect(width-50, 50, 20, height-70);
-fill(0);
+rect(100, 100, width-200, 200);
+
+fill(66, 66, 66);
 textAlign(CENTER, CENTER); 
 // text("Diploma", width/2, 120);
-img.width = 400;
-image(img, width/2 - img.width/2, 100);
 
-textSize(25);
+textSize(80);
 textFont('Helvetica');
 textStyle(BOLD);
 
-text("Certifica a:", width/2, 200);
-
-textSize(50);
-fill("#00ba9d");
-text(student_name, width/2, 250);
-
-fill(0);
-textSize(20);
-text("Por Participar y completar el Bootcamp:", width/2, 300);
+text("Data and Reality", width/2, 180);
 
 textSize(40);
-text(course, width/2, 350);
+fill("#004242");
+text("William C. Kent", width/2, 250);
+
+// fill(0);
+// textSize(20);
+// text("Por Participar y completar el Bootcamp:", width/2, 300);
+
+// textSize(40);
+// text(course, width/2, 350);
 
 }
 
@@ -150,7 +134,8 @@ function choice(a, b, p=0.5){
 }
 
 function generateGradient(x1, y1, x2, y2, start_color, end_color){
-  let gradient = drawingContext.createRadialGradient(x1, y1, 0, x2, y2, tileSize);
+  let gradient = drawingContext.createRadialGradient(x1, y1, 0, x2, y2, 200);
+  // gradient = drawingContext.createLinearGradient(x1, y1, x2, y2);
   // gradient.addColorStop(0, '#900');
   if (start_color == undefined) {
     start_color = pickRandomColor();
@@ -161,7 +146,7 @@ function generateGradient(x1, y1, x2, y2, start_color, end_color){
   gradient.addColorStop(0, start_color);
   // gradient.addColorStop(0.5, '#A0A');
   // gradient.addColorStop(0.5, pickRandomColor());
-  gradient.addColorStop(1, end_color);
+  gradient.addColorStop(0.5, end_color);
   drawingContext.fillStyle = gradient;
 
 }
