@@ -114,14 +114,12 @@ text("William C. Kent", width/2, 250);
 // text(course, width/2, 350);
 
 }
-
 // Generate a random color hex
 function pickRandomColor(){
   const r_pick = choice(0,1, 0.3);
   const g_pick = choice(0,1, 0.3);
   const b_pick = choice(0,1, 0.3);
   let r = Math.floor(prng1.random(0.8, 1)*256*r_pick);
-
   let g = Math.floor(prng1.random(0.8, 1)*256*g_pick); console.log(g);
   let b = Math.floor(prng1.random(0.8, 1)*256*b_pick); console.log(b);
   return "#" + r.toString(16).padStart(2,'0') + g.toString(16).padStart(2,'0') + b.toString(16).padStart(2,'0');
